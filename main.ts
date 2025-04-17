@@ -131,18 +131,18 @@ basic.forever(function () {
         if (color == 0) {
             basic.clearScreen()
             basic.showLeds(`
-                . # # # .
+                # # # # #
                 # . . . #
-                # # . # #
                 # . . . #
-                . # # # .
+                # . . . #
+                # # # # #
                 `)
         }
         basic.pause(100)
     }
     basic.clearScreen()
     basic.showIcon(IconNames.Angry)
-    basic.pause(89500)
+    basic.pause(85000)
     enabledetection = 0
     GOGOGO()
     StopMotors()
