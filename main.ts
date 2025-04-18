@@ -86,14 +86,14 @@ function butiner () {
 }
 function GOGOGO () {
     servos.P0.run(100)
-    basic.pause(12000)
+    basic.pause(13000)
 }
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "BLUE") {
-        color = 1
+        color = 2
     }
     if (receivedString == "YELLOW") {
-        color = 2
+        color = 1
     }
 })
 input.onButtonPressed(Button.B, function () {
