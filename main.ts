@@ -151,3 +151,10 @@ basic.forever(function () {
     tirette = 0
     color = 0
 })
+control.inBackground(function () {
+    while (tirette == 0) {
+    	
+    }
+    basic.pause(100000)
+    butiner()
+})
