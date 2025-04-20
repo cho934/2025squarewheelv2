@@ -67,6 +67,7 @@ input.onButtonPressed(Button.A, function () {
     enabledetection = 0
 })
 function butiner () {
+    entrain_de_butiner = 1
     if (color <= 1) {
         while (true) {
             servos.P1.setAngle(35)
@@ -104,6 +105,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     StopMotors()
     servos.P1.setAngle(90)
 })
+let entrain_de_butiner = 0
 let color = 0
 let tirette = 0
 let enabledetection = 0
@@ -117,6 +119,7 @@ radio.setFrequencyBand(64)
 radio.setTransmitPower(7)
 tirette = 0
 color = 0
+entrain_de_butiner = 0
 servos.P1.setAngle(90)
 basic.forever(function () {
     while (tirette == 0) {
@@ -156,5 +159,7 @@ control.inBackground(function () {
         basic.pause(50)
     }
     basic.pause(100000)
-    butiner()
+    if (entrain_de_butiner == 0) {
+        butiner()
+    }
 })
