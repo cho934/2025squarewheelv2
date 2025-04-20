@@ -153,7 +153,7 @@ basic.forever(function () {
 })
 control.inBackground(function () {
     while (tirette == 0) {
-    	
+        basic.pause(50)
     }
     basic.pause(100000)
     butiner()
