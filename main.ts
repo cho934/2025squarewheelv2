@@ -1,8 +1,3 @@
-radio.onReceivedNumber(function (receivedNumber) {
-    if (receivedNumber == 44) {
-        tirette = 1
-    }
-})
 /**
  * control.inBackground(function () {
  * 
@@ -54,16 +49,31 @@ radio.onReceivedNumber(function (receivedNumber) {
  * 
  * })
  */
+radio.onReceivedNumber(function (receivedNumber) {
+    if (receivedNumber == 44) {
+        tirette = 1
+    }
+})
 function StopMotors () {
     servos.P0.run(0)
     servos.P0.stop()
+}
+function initservo () {
+    if (color <= 1) {
+        servos.P1.setAngle(165)
+        basic.pause(2000)
+    }
+    if (color == 2) {
+        servos.P1.setAngle(15)
+        basic.pause(2000)
+    }
 }
 function Baculer () {
     if (color <= 1) {
         servos.P1.setAngle(90)
         basic.pause(1500)
         servos.P1.setAngle(100)
-        basic.pause(500)
+        basic.pause(1000)
         servos.P1.setAngle(90)
         basic.pause(1000)
     }
@@ -71,16 +81,17 @@ function Baculer () {
         servos.P1.setAngle(90)
         basic.pause(1500)
         servos.P1.setAngle(65)
-        basic.pause(500)
+        basic.pause(1000)
         servos.P1.setAngle(90)
         basic.pause(1000)
     }
 }
 input.onButtonPressed(Button.A, function () {
     enabledetection = 0
-    servos.P1.setAngle(90)
+    initservo()
     GOGOGO()
     StopMotors()
+    Baculer()
     butiner()
     enabledetection = 0
 })
@@ -89,17 +100,17 @@ function butiner () {
     if (color <= 1) {
         while (true) {
             servos.P1.setAngle(135)
-            basic.pause(500)
+            basic.pause(800)
             servos.P1.setAngle(155)
-            basic.pause(500)
+            basic.pause(800)
         }
     }
     if (color == 2) {
         while (true) {
             servos.P1.setAngle(45)
-            basic.pause(500)
+            basic.pause(800)
             servos.P1.setAngle(30)
-            basic.pause(500)
+            basic.pause(800)
         }
     }
 }
@@ -117,20 +128,17 @@ radio.onReceivedString(function (receivedString) {
 })
 input.onButtonPressed(Button.B, function () {
     StopMotors()
-    servos.P1.setAngle(90)
-})
-input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    color = 1
-    if (color <= 1) {
-        servos.P1.setAngle(165)
-        basic.pause(2000)
-    }
-    if (color == 2) {
-        servos.P1.setAngle(15)
-        basic.pause(2000)
-    }
     Baculer()
     butiner()
+})
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    if (color == 2 || color == 0) {
+        color = 1
+    } else {
+        if (color == 1) {
+            color = 2
+        }
+    }
 })
 let entrain_de_butiner = 0
 let color = 0
@@ -147,7 +155,15 @@ radio.setTransmitPower(7)
 tirette = 0
 color = 0
 entrain_de_butiner = 0
-servos.P1.setAngle(175)
+basic.pause(2000)
+basic.clearScreen()
+basic.showLeds(`
+    # # # # #
+    # . . . #
+    # . . . #
+    # . . . #
+    # # # # #
+    `)
 basic.forever(function () {
     while (tirette == 0) {
         if (color == 1) {
@@ -159,16 +175,10 @@ basic.forever(function () {
             basic.showIcon(IconNames.Diamond)
         }
         if (color == 0) {
-            basic.clearScreen()
-            basic.showLeds(`
-                # # # # #
-                # . . . #
-                # . . . #
-                # . . . #
-                # # # # #
-                `)
+        	
         }
         basic.pause(100)
+        initservo()
     }
     basic.clearScreen()
     basic.showIcon(IconNames.Angry)
