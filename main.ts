@@ -60,11 +60,11 @@ function StopMotors () {
 }
 function initservo () {
     if (color <= 1) {
-        servos.P1.setAngle(15)
+        servos.P1.setAngle(165)
         basic.pause(2000)
     }
     if (color == 2) {
-        servos.P1.setAngle(165)
+        servos.P1.setAngle(15)
         basic.pause(2000)
     }
 }
@@ -185,8 +185,9 @@ basic.forever(function () {
     basic.pause(85000)
     enabledetection = 0
     GOGOGO()
-    StopMotors()
     enabledetection = 0
+    StopMotors()
+    Baculer()
     butiner()
     tirette = 0
     color = 0
