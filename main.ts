@@ -60,11 +60,11 @@ function StopMotors () {
 }
 function initservo () {
     if (color <= 1) {
-        servos.P1.setAngle(165)
+        servos.P1.setAngle(15)
         basic.pause(2000)
     }
     if (color == 2) {
-        servos.P1.setAngle(15)
+        servos.P1.setAngle(165)
         basic.pause(2000)
     }
 }
@@ -73,17 +73,17 @@ function Baculer () {
         servos.P1.setAngle(90)
         basic.pause(1500)
         servos.P1.setAngle(100)
-        basic.pause(1000)
+        basic.pause(1500)
         servos.P1.setAngle(90)
-        basic.pause(1000)
+        basic.pause(1500)
     }
     if (color == 2) {
         servos.P1.setAngle(90)
         basic.pause(1500)
         servos.P1.setAngle(65)
-        basic.pause(1000)
+        basic.pause(1500)
         servos.P1.setAngle(90)
-        basic.pause(1000)
+        basic.pause(1500)
     }
 }
 input.onButtonPressed(Button.A, function () {
@@ -192,6 +192,7 @@ basic.forever(function () {
     color = 0
 })
 control.inBackground(function () {
+    basic.pause(500)
     while (tirette == 0) {
         basic.pause(50)
     }
