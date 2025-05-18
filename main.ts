@@ -96,21 +96,21 @@ input.onButtonPressed(Button.A, function () {
     enabledetection = 0
 })
 function butiner () {
-    entrain_de_butiner = 1
-    if (color <= 1) {
-        while (true) {
+    while (true) {
+        entrain_de_butiner = 1
+        if (color <= 1) {
+            basic.showIcon(IconNames.Pitchfork)
             servos.P1.setAngle(135)
-            basic.pause(800)
+            basic.pause(1000)
             servos.P1.setAngle(155)
-            basic.pause(800)
+            basic.pause(1000)
         }
-    }
-    if (color == 2) {
-        while (true) {
+        if (color == 2) {
+            basic.showIcon(IconNames.Chessboard)
             servos.P1.setAngle(45)
-            basic.pause(800)
+            basic.pause(1000)
             servos.P1.setAngle(30)
-            basic.pause(800)
+            basic.pause(1000)
         }
     }
 }
@@ -190,7 +190,6 @@ basic.forever(function () {
     Baculer()
     butiner()
     tirette = 0
-    color = 0
 })
 control.inBackground(function () {
     basic.pause(500)
