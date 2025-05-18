@@ -69,22 +69,7 @@ function initservo () {
     }
 }
 function Baculer () {
-    if (color <= 1) {
-        servos.P1.setAngle(90)
-        basic.pause(1500)
-        servos.P1.setAngle(100)
-        basic.pause(1500)
-        servos.P1.setAngle(90)
-        basic.pause(1500)
-    }
-    if (color == 2) {
-        servos.P1.setAngle(90)
-        basic.pause(1500)
-        servos.P1.setAngle(65)
-        basic.pause(1500)
-        servos.P1.setAngle(90)
-        basic.pause(1500)
-    }
+	
 }
 input.onButtonPressed(Button.A, function () {
     enabledetection = 0
@@ -92,25 +77,33 @@ input.onButtonPressed(Button.A, function () {
     GOGOGO()
     StopMotors()
     Baculer()
-    butiner()
     enabledetection = 0
+    butiner()
 })
 function butiner () {
+    if (color <= 1) {
+        servos.P1.setAngle(90)
+        basic.pause(1500)
+    }
+    if (color == 2) {
+        servos.P1.setAngle(90)
+        basic.pause(1500)
+    }
     while (true) {
         entrain_de_butiner = 1
         if (color <= 1) {
             basic.showIcon(IconNames.Pitchfork)
             servos.P1.setAngle(135)
-            basic.pause(1000)
+            basic.pause(500)
             servos.P1.setAngle(155)
-            basic.pause(1000)
+            basic.pause(500)
         }
         if (color == 2) {
             basic.showIcon(IconNames.Chessboard)
             servos.P1.setAngle(45)
-            basic.pause(1000)
+            basic.pause(500)
             servos.P1.setAngle(30)
-            basic.pause(1000)
+            basic.pause(500)
         }
     }
 }
@@ -188,15 +181,15 @@ basic.forever(function () {
     enabledetection = 0
     StopMotors()
     Baculer()
-    butiner()
     tirette = 0
+    butiner()
 })
 control.inBackground(function () {
     basic.pause(500)
     while (tirette == 0) {
-        basic.pause(50)
+        basic.pause(100)
     }
-    basic.pause(100000)
+    basic.pause(98000)
     if (entrain_de_butiner == 0) {
         butiner()
     }
