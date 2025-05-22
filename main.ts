@@ -1,54 +1,52 @@
-/**
- * control.inBackground(function () {
- * 
- * while (true) {
- * 
- * if (enabledetection >= 1) {
- * 
- * readpin = pins.analogReadPin(AnalogReadWritePin.P0)
- * 
- * // readpin = readpin * 5 / 3.3
- * 
- * // 150
- * 
- * // dist = 13530 * readpin ** -1.112 //150
- * 
- * // dist = 9462 / (readpin - 16.92); //150
- * 
- * // dist = 2076 / (readpin - 11)
- * 
- * // 30  !!a garder
- * 
- * dist = 2 * 2076 / (readpin - 22)
- * 
- * serial.writeValue("read", readpin)
- * 
- * serial.writeValue("dist", dist)
- * 
- * serial.writeValue("count", countdetection)
- * 
- * if (countdetection >= 3) {
- * 
- * StopMotors()
- * 
- * countdetection = 0
- * 
- * }
- * 
- * if (dist < 17) {
- * 
- * countdetection += 1
- * 
- * }
- * 
- * }
- * 
- * basic.pause(200)
- * 
- * }
- * 
- * })
- */
+// control.inBackground(function () {
+// 
+// while (true) {
+// 
+// if (enabledetection >= 1) {
+// 
+// readpin = pins.analogReadPin(AnalogReadWritePin.P0)
+// 
+// // readpin = readpin * 5 / 3.3
+// 
+// // 150
+// 
+// // dist = 13530 * readpin ** -1.112 //150
+// 
+// // dist = 9462 / (readpin - 16.92); //150
+// 
+// // dist = 2076 / (readpin - 11)
+// 
+// // 30  !!a garder
+// 
+// dist = 2 * 2076 / (readpin - 22)
+// 
+// serial.writeValue("read", readpin)
+// 
+// serial.writeValue("dist", dist)
+// 
+// serial.writeValue("count", countdetection)
+// 
+// if (countdetection >= 3) {
+// 
+// StopMotors()
+// 
+// countdetection = 0
+// 
+// }
+// 
+// if (dist < 17) {
+// 
+// countdetection += 1
+// 
+// }
+// 
+// }
+// 
+// basic.pause(200)
+// 
+// }
+// 
+// })
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 44) {
         tirette = 1
@@ -137,9 +135,9 @@ let entrain_de_butiner = 0
 let color = 0
 let tirette = 0
 let enabledetection = 0
-let readpin = 0
-let dist = 0
 let countdetection = 0
+let dist = 0
+let readpin = 0
 serial.redirectToUSB()
 enabledetection = 0
 radio.setGroup(169)
