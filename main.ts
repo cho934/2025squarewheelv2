@@ -1,52 +1,3 @@
-// control.inBackground(function () {
-// 
-// while (true) {
-// 
-// if (enabledetection >= 1) {
-// 
-// readpin = pins.analogReadPin(AnalogReadWritePin.P0)
-// 
-// // readpin = readpin * 5 / 3.3
-// 
-// // 150
-// 
-// // dist = 13530 * readpin ** -1.112 //150
-// 
-// // dist = 9462 / (readpin - 16.92); //150
-// 
-// // dist = 2076 / (readpin - 11)
-// 
-// // 30  !!a garder
-// 
-// dist = 2 * 2076 / (readpin - 22)
-// 
-// serial.writeValue("read", readpin)
-// 
-// serial.writeValue("dist", dist)
-// 
-// serial.writeValue("count", countdetection)
-// 
-// if (countdetection >= 3) {
-// 
-// StopMotors()
-// 
-// countdetection = 0
-// 
-// }
-// 
-// if (dist < 17) {
-// 
-// countdetection += 1
-// 
-// }
-// 
-// }
-// 
-// basic.pause(200)
-// 
-// }
-// 
-// })
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 44) {
         tirette = 1
@@ -54,56 +5,51 @@ radio.onReceivedNumber(function (receivedNumber) {
 })
 function StopMotors () {
     servos.P0.run(0)
-    servos.P0.stop()
 }
 function initservo () {
     if (color <= 1) {
-        servos.P1.setAngle(165)
+        servos.P1.setAngle(158)
         basic.pause(2000)
     }
     if (color == 2) {
-        servos.P1.setAngle(15)
+        servos.P1.setAngle(22)
         basic.pause(2000)
     }
 }
-function Baculer () {
-	
-}
 input.onButtonPressed(Button.A, function () {
-    enabledetection = 0
-    initservo()
+    entrain_de_butiner = 0
+    enabledetection = 1
     GOGOGO()
     StopMotors()
-    Baculer()
     enabledetection = 0
     butiner()
 })
 function butiner () {
     if (color <= 1) {
-        servos.P1.setAngle(90)
+        servos.P1.setAngle(0)
         basic.pause(1500)
     }
     if (color == 2) {
-        servos.P1.setAngle(90)
+        servos.P1.setAngle(180)
         basic.pause(1500)
     }
-    while (true) {
-        entrain_de_butiner = 1
+    entrain_de_butiner = 1
+    while (entrain_de_butiner) {
+        basic.showIcon(IconNames.Chessboard)
         if (color <= 1) {
-            basic.showIcon(IconNames.Pitchfork)
-            servos.P1.setAngle(135)
-            basic.pause(500)
-            servos.P1.setAngle(155)
-            basic.pause(500)
+            servos.P1.setAngle(45)
+            basic.pause(200)
+            servos.P1.setAngle(60)
+            basic.pause(200)
         }
         if (color == 2) {
-            basic.showIcon(IconNames.Chessboard)
-            servos.P1.setAngle(45)
-            basic.pause(500)
-            servos.P1.setAngle(30)
-            basic.pause(500)
+            servos.P1.setAngle(135)
+            basic.pause(200)
+            servos.P1.setAngle(115)
+            basic.pause(200)
         }
     }
+    basic.clearScreen()
 }
 function GOGOGO () {
     servos.P0.run(100)
@@ -118,26 +64,29 @@ radio.onReceivedString(function (receivedString) {
     }
 })
 input.onButtonPressed(Button.B, function () {
+    entrain_de_butiner = 0
     StopMotors()
-    Baculer()
     butiner()
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    entrain_de_butiner = 0
     if (color == 2 || color == 0) {
         color = 1
+        initservo()
     } else {
         if (color == 1) {
             color = 2
+            initservo()
         }
     }
 })
+let countdetection = 0
+let dist = 0
+let readpin = 0
 let entrain_de_butiner = 0
 let color = 0
 let tirette = 0
 let enabledetection = 0
-let countdetection = 0
-let dist = 0
-let readpin = 0
 serial.redirectToUSB()
 enabledetection = 0
 radio.setGroup(169)
@@ -156,6 +105,7 @@ basic.showLeds(`
     # # # # #
     `)
 basic.forever(function () {
+    initservo()
     while (tirette == 0) {
         if (color == 1) {
             basic.clearScreen()
@@ -169,7 +119,6 @@ basic.forever(function () {
         	
         }
         basic.pause(100)
-        initservo()
     }
     basic.clearScreen()
     basic.showIcon(IconNames.Angry)
@@ -178,9 +127,37 @@ basic.forever(function () {
     GOGOGO()
     enabledetection = 0
     StopMotors()
-    Baculer()
     tirette = 0
     butiner()
+})
+control.inBackground(function () {
+    while (true) {
+        if (enabledetection >= 1) {
+            readpin = pins.analogReadPin(AnalogReadWritePin.P2)
+            readpin = readpin * 5 / 3.3
+            // // 150
+            // 
+            // // dist = 13530 * readpin ** -1.112 //150
+            // 
+            // // dist = 9462 / (readpin - 16.92); //150
+            // 
+            // // dist = 2076 / (readpin - 11)
+            // 
+            // // 30  !!a garder
+            dist = 2 * 2076 / (readpin - 22)
+            serial.writeValue("read", readpin)
+            serial.writeValue("dist", dist)
+            serial.writeValue("count", countdetection)
+            if (countdetection >= 3) {
+                StopMotors()
+                countdetection = 0
+            }
+            if (dist < 5) {
+                countdetection += 1
+            }
+        }
+        basic.pause(200)
+    }
 })
 control.inBackground(function () {
     basic.pause(500)
