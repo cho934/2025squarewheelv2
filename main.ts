@@ -105,15 +105,16 @@ basic.showLeds(`
     # # # # #
     `)
 basic.forever(function () {
-    initservo()
     while (tirette == 0) {
         if (color == 1) {
             basic.clearScreen()
             basic.showIcon(IconNames.Skull)
+            initservo()
         }
         if (color == 2) {
             basic.clearScreen()
             basic.showIcon(IconNames.Diamond)
+            initservo()
         }
         if (color == 0) {
         	
