@@ -2,6 +2,12 @@ radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 44) {
         tirette = 1
     }
+    if (receivedNumber == 11) {
+        color = 1
+    }
+    if (receivedNumber == 22) {
+        color = 2
+    }
 })
 function StopMotors () {
     servos.P0.run(0)
