@@ -36,7 +36,7 @@ function butiner () {
         basic.pause(1500)
     }
     if (color == 2) {
-        servos.P1.setAngle(180)
+        servos.P1.setAngle(0)
         basic.pause(1500)
     }
     entrain_de_butiner = 1
@@ -44,22 +44,22 @@ function butiner () {
         basic.showIcon(IconNames.Chessboard)
         if (color <= 1) {
             servos.P1.setAngle(45)
-            basic.pause(200)
+            basic.pause(300)
             servos.P1.setAngle(60)
-            basic.pause(200)
+            basic.pause(300)
         }
         if (color == 2) {
-            servos.P1.setAngle(135)
-            basic.pause(200)
-            servos.P1.setAngle(115)
-            basic.pause(200)
+            servos.P1.setAngle(45)
+            basic.pause(300)
+            servos.P1.setAngle(60)
+            basic.pause(300)
         }
     }
     basic.clearScreen()
 }
 function GOGOGO () {
     servos.P0.run(100)
-    basic.pause(13000)
+    basic.pause(15000)
 }
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "BLUE") {
@@ -130,7 +130,7 @@ basic.forever(function () {
     basic.clearScreen()
     basic.showIcon(IconNames.Angry)
     basic.pause(85000)
-    enabledetection = 0
+    enabledetection = 1
     GOGOGO()
     enabledetection = 0
     StopMotors()
