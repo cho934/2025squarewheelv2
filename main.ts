@@ -14,11 +14,11 @@ function StopMotors () {
 }
 function initservo () {
     if (color <= 1) {
-        servos.P1.setAngle(158)
+        servos.P1.setAngle(45)
         basic.pause(2000)
     }
     if (color == 2) {
-        servos.P1.setAngle(22)
+        servos.P1.setAngle(45)
         basic.pause(2000)
     }
 }
@@ -31,25 +31,17 @@ input.onButtonPressed(Button.A, function () {
     butiner()
 })
 function butiner () {
-    if (color <= 1) {
-        servos.P1.setAngle(0)
-        basic.pause(1500)
-    }
-    if (color == 2) {
-        servos.P1.setAngle(0)
-        basic.pause(1500)
-    }
     entrain_de_butiner = 1
     while (entrain_de_butiner) {
         basic.showIcon(IconNames.Chessboard)
         if (color <= 1) {
-            servos.P1.setAngle(45)
+            servos.P1.setAngle(22)
             basic.pause(300)
             servos.P1.setAngle(60)
             basic.pause(300)
         }
         if (color == 2) {
-            servos.P1.setAngle(45)
+            servos.P1.setAngle(22)
             basic.pause(300)
             servos.P1.setAngle(60)
             basic.pause(300)
@@ -97,7 +89,7 @@ basic.showLeds(`
     . . # . .
     . . # . .
     . . # . .
-    . . . . .
+    . . # . .
     . . . . .
     `)
 serial.redirectToUSB()
@@ -176,9 +168,9 @@ control.inBackground(function () {
 control.inBackground(function () {
     basic.pause(500)
     while (tirette == 0) {
-        basic.pause(100)
+        basic.pause(10)
     }
-    basic.pause(98000)
+    basic.pause(100000)
     if (entrain_de_butiner == 0) {
         butiner()
     }
