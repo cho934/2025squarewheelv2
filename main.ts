@@ -93,6 +93,13 @@ let entrain_de_butiner = 0
 let color = 0
 let tirette = 0
 let enabledetection = 0
+basic.showLeds(`
+    . . # . .
+    . . # . .
+    . . # . .
+    . . . . .
+    . . . . .
+    `)
 serial.redirectToUSB()
 enabledetection = 0
 radio.setGroup(169)
