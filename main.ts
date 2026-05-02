@@ -24,7 +24,7 @@ function initservo () {
 }
 input.onButtonPressed(Button.A, function () {
     entrain_de_butiner = 0
-    enabledetection = 1
+    enabledetection = 0
     GOGOGO()
     StopMotors()
     enabledetection = 0
@@ -51,7 +51,7 @@ function butiner () {
 }
 function GOGOGO () {
     servos.P0.run(100)
-    basic.pause(15000)
+    basic.pause(12000)
 }
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "BLUE") {
@@ -128,8 +128,8 @@ basic.forever(function () {
     }
     basic.clearScreen()
     basic.showIcon(IconNames.Angry)
-    basic.pause(85000)
-    enabledetection = 1
+    basic.pause(83000)
+    enabledetection = 0
     GOGOGO()
     enabledetection = 0
     StopMotors()
