@@ -24,7 +24,7 @@ function initservo () {
 }
 input.onButtonPressed(Button.A, function () {
     entrain_de_butiner = 0
-    enabledetection = 0
+    enabledetection = 1
     GOGOGO()
     StopMotors()
     enabledetection = 0
@@ -51,7 +51,7 @@ function butiner () {
 }
 function GOGOGO () {
     servos.P0.run(100)
-    basic.pause(12000)
+    basic.pause(8000)
 }
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "BLUE") {
@@ -78,28 +78,21 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
         }
     }
 })
-let countdetection = 0
 let dist = 0
 let readpin = 0
 let entrain_de_butiner = 0
 let color = 0
 let tirette = 0
 let enabledetection = 0
-basic.showLeds(`
-    . . # . .
-    . . # . .
-    . . # . .
-    . . # . .
-    . . . . .
-    `)
 serial.redirectToUSB()
-enabledetection = 0
+enabledetection = 1
 radio.setGroup(169)
 radio.setFrequencyBand(64)
 radio.setTransmitPower(7)
 tirette = 0
 color = 0
 entrain_de_butiner = 0
+let countdetection = 0
 basic.pause(2000)
 basic.clearScreen()
 basic.showLeds(`
@@ -129,7 +122,7 @@ basic.forever(function () {
     basic.clearScreen()
     basic.showIcon(IconNames.Angry)
     basic.pause(83000)
-    enabledetection = 0
+    enabledetection = 1
     GOGOGO()
     enabledetection = 0
     StopMotors()
@@ -154,15 +147,15 @@ control.inBackground(function () {
             serial.writeValue("read", readpin)
             serial.writeValue("dist", dist)
             serial.writeValue("count", countdetection)
-            if (countdetection >= 3) {
+            if (countdetection >= 2) {
                 StopMotors()
                 countdetection = 0
             }
-            if (dist < 5) {
+            if (dist < 12) {
                 countdetection += 1
             }
         }
-        basic.pause(200)
+        basic.pause(100)
     }
 })
 control.inBackground(function () {
@@ -170,7 +163,7 @@ control.inBackground(function () {
     while (tirette == 0) {
         basic.pause(10)
     }
-    basic.pause(100000)
+    basic.pause(99000)
     if (entrain_de_butiner == 0) {
         butiner()
     }
