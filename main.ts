@@ -24,7 +24,7 @@ function initservo () {
 }
 input.onButtonPressed(Button.A, function () {
     entrain_de_butiner = 0
-    enabledetection = 1
+    enabledetection = 0
     GOGOGO()
     StopMotors()
     enabledetection = 0
@@ -85,7 +85,7 @@ let color = 0
 let tirette = 0
 let enabledetection = 0
 serial.redirectToUSB()
-enabledetection = 1
+enabledetection = 0
 radio.setGroup(169)
 radio.setFrequencyBand(64)
 radio.setTransmitPower(7)
@@ -122,7 +122,7 @@ basic.forever(function () {
     basic.clearScreen()
     basic.showIcon(IconNames.Angry)
     basic.pause(83000)
-    enabledetection = 1
+    enabledetection = 0
     GOGOGO()
     enabledetection = 0
     StopMotors()
